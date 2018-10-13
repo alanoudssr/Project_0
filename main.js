@@ -5,6 +5,30 @@ $(function () {
     //this var determines if the game hits a draw
     var counter = 0;
 
+    //assign the board var
+    var $board = $('#container');
+
+    //these variables can be changed to change the grid size
+    var desiredColumn = 3;
+    var desiredRow = 3;
+
+    //calling the create a grid function
+    createGrid();
+
+    //this funtion created the grid automatically (grid size can be easily changed)
+    function createGrid() {
+        //loop to create multiple rows
+        for (var row = 0; row < desiredRow; row++) {
+          var $row = $('<div>').addClass('row');
+          //within each row create multiple columns
+          for (var column = 0; column < desiredColumn; column++) {
+            var $column = $('<div>').addClass('column empty').attr('data-column', column).attr('data-row', row);;
+            $row.append($column);
+          }
+          $board.append($row);
+        }
+      }
+
     // the starting turn of the game is displayed on the page by creating a span and adding text to it
     var $turn = $("<span/>");
     $turn.text('X');
@@ -27,15 +51,17 @@ $(function () {
 
     // if a slot in the 3x3 grid is clicked give it class x or o depending on the player's turn
     // also check for wins and change current player to the other player 
-    $('.slot').on('click', function (event) {
+    $('.column.empty').on('click', function (event) {
 
-        if ($(this).hasClass('playedX') === false && $(this).hasClass('playedO') === false) {
+        if($(this).hasClass('empty')){
             if ($player === 'x') {
+                $(this).removeClass('empty');
                 $(this).addClass('playedX');
                 $player = 'o';
                 changePlayer();
                 checkWin();
             } else if ($player === 'o') {
+                $(this).removeClass('empty');
                 $(this).addClass('playedO');
                 $player = 'x';
                 changePlayer();
