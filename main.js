@@ -2,6 +2,8 @@ $(function () {
 
     //this var determines the current player
     var $player = 'x';
+    //this var determines if the game hits a draw
+    var counter = 0;
 
     // the starting turn of the game is displayed on the page by creating a span and adding text to it
     var $turn = $("<span/>");
@@ -79,6 +81,20 @@ $(function () {
             console.log('O Wins!');
         }
 
+        // this will check for draw and display a draw result
+        $('.slot').each(function (index) {
+            if ($(this).hasClass('playedO') || $(this).hasClass('playedX')) {
+                counter++;
+            }
+            if (counter === 45) {
+                console.log("Aww it's a draw");
+            }
+        });
     }
+
+    //if replay button is clicked reload page
+    $('.replay').on('click', function () {
+        location.reload();
+    })
 
 });
