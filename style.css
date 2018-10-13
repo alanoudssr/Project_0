@@ -37,6 +37,18 @@ h2, h2>p {
     border: 2px solid aliceblue;
 }
 
+/* this shows the x inside the slot */
+.playedX {
+    background-image: url('images/x.png');
+    background-size: contain;
+}
+
+/* this shows the o inside the slot */
+.playedO {
+    background-image: url('images/o.png');
+    background-size: contain;
+}
+
 /* this is to rearrange the divs in a 3x3 grid */
 .top {
     display: flex;
