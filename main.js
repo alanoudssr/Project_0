@@ -32,12 +32,53 @@ $(function () {
                 $(this).addClass('playedX');
                 $player = 'o';
                 changePlayer();
+                checkWin();
             } else if ($player === 'o') {
                 $(this).addClass('playedO');
                 $player = 'x';
                 changePlayer();
+                checkWin();
             }
         }
     });
+
+    function checkWin() {
+
+        //check for wins and display popup when win is achieved
+        if ($('.slot1.playedX, .slot2.playedX, .slot3.playedX').length == 3) {
+            console.log('X Wins!');
+        } else if ($('.slot1.playedX, .slot4.playedX, .slot7.playedX').length == 3) {
+            console.log('X Wins!');
+        } else if ($('.slot1.playedX, .slot5.playedX, .slot9.playedX').length == 3) {
+            console.log('X Wins!');
+        } else if ($('.slot4.playedX, .slot5.playedX, .slot6.playedX').length == 3) {
+            console.log('X Wins!');
+        } else if ($('.slot7.playedX, .slot8.playedX, .slot9.playedX').length == 3) {
+            console.log('X Wins!');
+        } else if ($('.slot2.playedX, .slot5.playedX, .slot8.playedX').length == 3) {
+            console.log('X Wins!');
+        } else if ($('.slot3.playedX, .slot6.playedX, .slot9.playedX').length == 3) {
+            console.log('X Wins!');
+        } else if ($('.slot3.playedX, .slot5.playedX, .slot7.playedX').length == 3) {
+            console.log('X Wins!');
+        } else if ($('.slot1.playedO, .slot2.playedO, .slot3.playedO').length == 3) {
+            console.log('O Wins!');
+        } else if ($('.slot1.playedO, .slot4.playedO, .slot7.playedO').length == 3) {
+            console.log('O Wins!');
+        } else if ($('.slot1.playedO, .slot5.playedO, .slot9.playedO').length == 3) {
+            console.log('O Wins!');
+        } else if ($('.slot4.playedO, .slot5.playedO, .slot6.playedO').length == 3) {
+            console.log('O Wins!');
+        } else if ($('.slot7.playedO, .slot8.playedO, .slot9.playedO').length == 3) {
+            console.log('O Wins!');
+        } else if ($('.slot2.playedO, .slot5.playedO, .slot8.playedO').length == 3) {
+            console.log('O Wins!');
+        } else if ($('.slot3.playedO, .slot6.playedO, .slot9.playedO').length == 3) {
+            console.log('O Wins!');
+        } else if ($('.slot3.playedO, .slot5.playedO, .slot7.playedO').length == 3) {
+            console.log('O Wins!');
+        }
+
+    }
 
 });
