@@ -44,42 +44,63 @@ $(function () {
         }
     });
 
+    // this is popup window that displayed result
+    var popUp = document.getElementById('winPopup');
+    var span = document.getElementsByClassName("close")[0];
+
     function checkWin() {
 
         //check for wins and display popup when win is achieved
         if ($('.slot1.playedX, .slot2.playedX, .slot3.playedX').length == 3) {
-            console.log('X Wins!');
+            $('.popUp-content>p').text('Congrats Player X!');
+            popUp.style.display = "block";
         } else if ($('.slot1.playedX, .slot4.playedX, .slot7.playedX').length == 3) {
-            console.log('X Wins!');
+            $('.popUp-content>p').text('Congrats Player X!');
+            popUp.style.display = "block";
         } else if ($('.slot1.playedX, .slot5.playedX, .slot9.playedX').length == 3) {
-            console.log('X Wins!');
+            $('.popUp-content>p').text('Congrats Player X!');
+            popUp.style.display = "block";
         } else if ($('.slot4.playedX, .slot5.playedX, .slot6.playedX').length == 3) {
-            console.log('X Wins!');
+            $('.popUp-content>p').text('Congrats Player X!');
+            popUp.style.display = "block";
         } else if ($('.slot7.playedX, .slot8.playedX, .slot9.playedX').length == 3) {
-            console.log('X Wins!');
+            $('.popUp-content>p').text('Congrats Player X!');
+            popUp.style.display = "block";
         } else if ($('.slot2.playedX, .slot5.playedX, .slot8.playedX').length == 3) {
-            console.log('X Wins!');
+            $('.popUp-content>p').text('Congrats Player X!');
+            popUp.style.display = "block";
         } else if ($('.slot3.playedX, .slot6.playedX, .slot9.playedX').length == 3) {
-            console.log('X Wins!');
+            $('.popUp-content>p').text('Congrats Player X!');
+            popUp.style.display = "block";
         } else if ($('.slot3.playedX, .slot5.playedX, .slot7.playedX').length == 3) {
-            console.log('X Wins!');
+            $('.popUp-content>p').text('Congrats Player X!');
+            popUp.style.display = "block";
         } else if ($('.slot1.playedO, .slot2.playedO, .slot3.playedO').length == 3) {
-            console.log('O Wins!');
+            $('.popUp-content>p').text('Congrats Player O!');
+            popUp.style.display = "block";
         } else if ($('.slot1.playedO, .slot4.playedO, .slot7.playedO').length == 3) {
-            console.log('O Wins!');
+            $('.popUp-content>p').text('Congrats Player O!');
+            popUp.style.display = "block";
         } else if ($('.slot1.playedO, .slot5.playedO, .slot9.playedO').length == 3) {
-            console.log('O Wins!');
+            $('.popUp-content>p').text('Congrats Player O!');
+            popUp.style.display = "block";
         } else if ($('.slot4.playedO, .slot5.playedO, .slot6.playedO').length == 3) {
-            console.log('O Wins!');
+            $('.popUp-content>p').text('Congrats Player O!');
+            popUp.style.display = "block";
         } else if ($('.slot7.playedO, .slot8.playedO, .slot9.playedO').length == 3) {
-            console.log('O Wins!');
+            $('.popUp-content>p').text('Congrats Player O!');
+            popUp.style.display = "block";
         } else if ($('.slot2.playedO, .slot5.playedO, .slot8.playedO').length == 3) {
-            console.log('O Wins!');
+            $('.popUp-content>p').text('Congrats Player O!');
+            popUp.style.display = "block";
         } else if ($('.slot3.playedO, .slot6.playedO, .slot9.playedO').length == 3) {
-            console.log('O Wins!');
+            $('.popUp-content>p').text('Congrats Player O!');
+            popUp.style.display = "block";
         } else if ($('.slot3.playedO, .slot5.playedO, .slot7.playedO').length == 3) {
-            console.log('O Wins!');
+            $('.popUp-content>p').text('Congrats Player O!');
+            popUp.style.display = "block";
         }
+
 
         // this will check for draw and display a draw result
         $('.slot').each(function (index) {
@@ -87,9 +108,22 @@ $(function () {
                 counter++;
             }
             if (counter === 45) {
-                console.log("Aww it's a draw");
+                $('.popUp-content>p').text("Aww it's a draw");
+                popUp.style.display = "block";
             }
         });
+    }
+
+    //when popup x button is clicked close the popup
+    span.onclick = function () {
+        popUp.style.display = "none";
+    }
+
+    //when area outside the popup is clicked close the popup
+    window.onclick = function (event) {
+        if (event.target == popUp) {
+            popUp.style.display = "none";
+        }
     }
 
     //if replay button is clicked reload page

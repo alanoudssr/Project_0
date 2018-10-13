@@ -78,6 +78,58 @@ h2, h2>p {
     flex-direction: row;
 }
 
+/* the popup */
+.pop_up {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    padding-top: 100px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+}
+
+/* the popup content */
+.popUp-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    color: rgb(255, 217, 0);
+    font-size: 30px;
+    font-family: Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    font-variant: small-caps;
+    text-align: center;
+    text-shadow: 1px 1px rgb(255, 183, 0);
+}
+
+/* The Close Button */
+.close {
+    color: rgb(255, 240, 154);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: rgb(255, 217, 0);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+
+}
+
 /* the replay button */
 .replay {
     margin-top: 20px;
@@ -93,4 +145,11 @@ h2, h2>p {
     font-weight: bold;
     font-variant: small-caps;
     letter-spacing: 1px;
+}
+
+/* the replay button on the popup */
+.popUp-content>.replay {
+    background-color: rgb(255, 217, 0);
+    color: whitesmoke;
+
 }
