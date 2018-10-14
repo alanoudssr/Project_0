@@ -16,7 +16,19 @@
     <!-- title -->
     <h1>tic tac toe</h1>
     <!-- player turn -->
-    <h2>Now playing<p class="playerTurn">player </p></h2>
+    <h2>Now playing<p class="playerTurn">player </p>
+    </h2>
+    <h2 class="gridLabel">choose a grid size</h2>
+
+    <div class="gridSize">
+        <input type="radio" name="gridNum" value="3">3x3
+        <input type="radio" name="gridNum" value="4">4x4
+        <input type="radio" name="gridNum" value="5">5x5
+    </div>
+    <br /><br />
+    <input type="button" id="choiceButton" Value="Set Grid" />
+    <br>
+    <br>
 
     <!-- popup -->
     <div id="winPopup" class="pop_up">
@@ -30,8 +42,8 @@
     <div id="container"></div>
     <!-- replay button -->
     <div class="btn">
-    <button class="replay">replay</button>
-</div>
+        <button class="replay">replay</button>
+    </div>
 </body>
 
 </html>
