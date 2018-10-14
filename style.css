@@ -39,13 +39,13 @@ h2, h2>p {
 }
 
 /* this shows the x inside the slot */
-.playedX {
+.x {
     background-image: url('images/x.png');
     background-size: contain;
 }
 
 /* this shows the o inside the slot */
-.playedO {
+.o {
     background-image: url('images/o.png');
     background-size: contain;
 }

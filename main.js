@@ -9,8 +9,9 @@ $(function () {
     var $board = $('#container');
 
     //these variables can be changed to change the grid size
-    var desiredColumn = 3;
-    var desiredRow = 3;
+    var size = 3;
+    var doubleSize = 6;
+    var tripleSize = 9;
 
     //calling the create a grid function
     createGrid();
@@ -18,16 +19,18 @@ $(function () {
     //this funtion created the grid automatically (grid size can be easily changed)
     function createGrid() {
         //loop to create multiple rows
-        for (var row = 0; row < desiredRow; row++) {
-          var $row = $('<div>').addClass('row');
-          //within each row create multiple columns
-          for (var column = 0; column < desiredColumn; column++) {
-            var $column = $('<div>').addClass('column empty').attr('data-column', column).attr('data-row', row);;
-            $row.append($column);
-          }
-          $board.append($row);
+        var random = 0;
+        for (var row = 0; row < size; row++) {
+            var $row = $('<div>').addClass('row').attr('id', 'row' + row);
+            //within each row create multiple columns
+            for (var column = 0; column < size; column++) {
+                var $column = $('<div>').addClass('column empty').attr('id', random).attr('data-column', column).attr('data-row', row);
+                $row.append($column);
+                random++;
+            }
+            $board.append($row);
         }
-      }
+    }
 
     // the starting turn of the game is displayed on the page by creating a span and adding text to it
     var $turn = $("<span/>");
@@ -52,22 +55,24 @@ $(function () {
     // if a slot in the 3x3 grid is clicked give it class x or o depending on the player's turn
     // also check for wins and change current player to the other player 
     $('.column.empty').on('click', function (event) {
-
-        if($(this).hasClass('empty')){
-            if ($player === 'x') {
-                $(this).removeClass('empty');
-                $(this).addClass('playedX');
-                $player = 'o';
-                changePlayer();
-                checkWin();
-            } else if ($player === 'o') {
-                $(this).removeClass('empty');
-                $(this).addClass('playedO');
-                $player = 'x';
-                changePlayer();
-                checkWin();
+     
+            if ($(this).hasClass('empty')) {
+                if ($player === 'x') {
+                    $(this).removeClass('empty');
+                    $(this).addClass($player);
+                    $(this).data('player', $player);
+                    checkWin();
+                    $player = 'o';
+                    changePlayer();
+                } else if ($player === 'o') {
+                    $(this).removeClass('empty');
+                    $(this).addClass($player);
+                    checkWin();
+                    $player = 'x';
+                    changePlayer();
+                }
             }
-        }
+        
     });
 
     // this is popup window that displayed result
@@ -77,58 +82,47 @@ $(function () {
     function checkWin() {
 
         //check for wins and display popup when win is achieved
-        if ($('.slot1.playedX, .slot2.playedX, .slot3.playedX').length == 3) {
-            $('.popUp-content>p').text('Congrats Player X!');
-            popUp.style.display = "block";
-        } else if ($('.slot1.playedX, .slot4.playedX, .slot7.playedX').length == 3) {
-            $('.popUp-content>p').text('Congrats Player X!');
-            popUp.style.display = "block";
-        } else if ($('.slot1.playedX, .slot5.playedX, .slot9.playedX').length == 3) {
-            $('.popUp-content>p').text('Congrats Player X!');
-            popUp.style.display = "block";
-        } else if ($('.slot4.playedX, .slot5.playedX, .slot6.playedX').length == 3) {
-            $('.popUp-content>p').text('Congrats Player X!');
-            popUp.style.display = "block";
-        } else if ($('.slot7.playedX, .slot8.playedX, .slot9.playedX').length == 3) {
-            $('.popUp-content>p').text('Congrats Player X!');
-            popUp.style.display = "block";
-        } else if ($('.slot2.playedX, .slot5.playedX, .slot8.playedX').length == 3) {
-            $('.popUp-content>p').text('Congrats Player X!');
-            popUp.style.display = "block";
-        } else if ($('.slot3.playedX, .slot6.playedX, .slot9.playedX').length == 3) {
-            $('.popUp-content>p').text('Congrats Player X!');
-            popUp.style.display = "block";
-        } else if ($('.slot3.playedX, .slot5.playedX, .slot7.playedX').length == 3) {
-            $('.popUp-content>p').text('Congrats Player X!');
-            popUp.style.display = "block";
-        } else if ($('.slot1.playedO, .slot2.playedO, .slot3.playedO').length == 3) {
-            $('.popUp-content>p').text('Congrats Player O!');
-            popUp.style.display = "block";
-        } else if ($('.slot1.playedO, .slot4.playedO, .slot7.playedO').length == 3) {
-            $('.popUp-content>p').text('Congrats Player O!');
-            popUp.style.display = "block";
-        } else if ($('.slot1.playedO, .slot5.playedO, .slot9.playedO').length == 3) {
-            $('.popUp-content>p').text('Congrats Player O!');
-            popUp.style.display = "block";
-        } else if ($('.slot4.playedO, .slot5.playedO, .slot6.playedO').length == 3) {
-            $('.popUp-content>p').text('Congrats Player O!');
-            popUp.style.display = "block";
-        } else if ($('.slot7.playedO, .slot8.playedO, .slot9.playedO').length == 3) {
-            $('.popUp-content>p').text('Congrats Player O!');
-            popUp.style.display = "block";
-        } else if ($('.slot2.playedO, .slot5.playedO, .slot8.playedO').length == 3) {
-            $('.popUp-content>p').text('Congrats Player O!');
-            popUp.style.display = "block";
-        } else if ($('.slot3.playedO, .slot6.playedO, .slot9.playedO').length == 3) {
-            $('.popUp-content>p').text('Congrats Player O!');
-            popUp.style.display = "block";
-        } else if ($('.slot3.playedO, .slot5.playedO, .slot7.playedO').length == 3) {
-            $('.popUp-content>p').text('Congrats Player O!');
-            popUp.style.display = "block";
+        checkHorizontal();
+        checkVertical();
+        checkDiagonal();
+
+        // this will check for a horizontal win
+        function checkHorizontal() {
+            for (var j = 0; j < 9; j++) {
+                    var currentRow = '#'+j;
+                    var nextSibling = '#'+ ++j;
+                    var nextNextSibling = '#'+ ++j;
+                    if ($(currentRow).hasClass($player) && $(nextSibling).hasClass($player) && $(nextNextSibling).hasClass($player)) {
+                        $('.popUp-content>p').text("Congrats player " + $player + "!");
+                        popUp.style.display = "block";
+                    }
+                
+            }
         }
 
+        // this will check for a vertical win
+        function checkVertical() {
+            for (var j = 0; j < tripleSize; j ++) {
+                    var currentRow = '#'+j;
+                    j += size;
+                    var nextRow = '#'+j;
+                    j += size;                    
+                    var nextNextRow = '#'+j;
+                    j -= doubleSize;                    
+                    if ($(currentRow).hasClass($player) && $(nextRow).hasClass($player) && $(nextNextRow).hasClass($player)) {
+                        $('.popUp-content>p').text("Congrats player " + $player + "!");
+                        popUp.style.display = "block";
 
-        // this will check for draw and display a draw result
+                    }
+                }
+            }
+        
+
+        function checkDiagonal() {
+
+        }
+
+        // this will check for draw
         $('.slot').each(function (index) {
             if ($(this).hasClass('playedO') || $(this).hasClass('playedX')) {
                 counter++;
@@ -139,6 +133,7 @@ $(function () {
             }
         });
     }
+
 
     //when popup x button is clicked close the popup
     span.onclick = function () {
@@ -155,6 +150,6 @@ $(function () {
     //if replay button is clicked reload page
     $('.replay').on('click', function () {
         location.reload();
-    })
+    });
 
 });
