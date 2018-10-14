@@ -18,31 +18,37 @@
     <!-- player turn -->
     <h2>Now playing<p class="playerTurn">player </p>
     </h2>
-    <h2 class="gridLabel">choose a grid size</h2>
 
-    <div class="gridSize">
-        <input type="radio" name="gridNum" value="3">3x3
-        <input type="radio" name="gridNum" value="4">4x4
-        <input type="radio" name="gridNum" value="5">5x5
+    <!-- this is the initial popup to promote the user to choose a grid size -->
+    <div id="gridPopup" class="pop_up">
+        <div class="popUp-content">
+            <h2 class="gridLabel">choose a grid size</h2>
+
+            <div class="gridSize">
+                <input type="radio" name="gridNum" value="3">3x3
+                <input type="radio" name="gridNum" value="4">4x4
+                <input type="radio" name="gridNum" value="5">5x5
+            </div>
+            <br /><br />
+            <input type="button" class="buttonStyle" id="choiceButton" Value="set grid" />
+            <br>
+            <br>
+        </div>
     </div>
-    <br /><br />
-    <input type="button" id="choiceButton" Value="Set Grid" />
-    <br>
-    <br>
 
     <!-- popup -->
     <div id="winPopup" class="pop_up">
         <div class="popUp-content">
             <span class="close">&times;</span>
             <p></p>
-            <button class="replay">replay</button>
+            <button class="buttonStyle" id="replay">replay</button>
         </div>
     </div>
     <!-- grid -->
     <div id="container"></div>
     <!-- replay button -->
     <div class="btn">
-        <button class="replay">replay</button>
+        <button class="buttonStyle" id="replay">replay</button>
     </div>
 </body>
 

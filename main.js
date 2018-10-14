@@ -1,25 +1,25 @@
 $(document).ready(function () {
 
+    //landing popup! Promotes user to choose a grid size
+    var gridPopUp = document.getElementById('gridPopup');
+    var span = document.getElementsByClassName("close")[0];
+    gridPopUp.style.display = "block";
+
     //this var determines the current player
     var $player = 'x';
-    //this var determines if the game hits a draw
-    var counter = 0;
-
-    //assign the board var
+    //assign the board variable
     var $board = $('#container');
 
     // assign grid size from user
     var selectedSize;
-
     $('#choiceButton').click(function () {
         selectedSize = $('input[name=gridNum]:checked').val();
         selectedSize = parseInt(selectedSize);
-        // debugger;
+        //close popup and create the grid
+        gridPopUp.style.display = "none";
         createGrid();
-
     });
 
-    //these variables can be changed to change the grid size
     // the starting turn of the game is displayed on the page by creating a span and adding text to it
     var $turn = $("<span/>");
     $turn.text('X');
@@ -29,59 +29,50 @@ $(document).ready(function () {
 
     // this function alternates the text displayed between player x and o
     function changePlayer() {
-        if ($player === 'x') {
+        if ($player === 'o') {
+            $player = 'x';
             $(".playerTurn").css('color', 'whitesmoke');
             $turn.css('color', 'black');
             $turn.text('X');
-        } else if ($player === 'o') {
+        } else if ($player === 'x') {
+            $player = 'o';
             $(".playerTurn").css('color', 'black');
             $turn.css('color', 'whitesmoke');
             $turn.text('O');
         }
     }
 
-    //calling the create a grid function
-
-    //this funtion created the grid automatically (grid size can be easily changed)
+    //this function creates the grid automatically (grid size is chosen by the player)
     function createGrid() {
         var size = selectedSize;
-        // debugger;
         $board.empty();
         //loop to create multiple rows
         var random = 0;
         for (var row = 0; row < size; row++) {
-            var $row = $('<div>').addClass('row').attr('id', row);
+            var $row = $('<div>').addClass('row');
             //within each row create multiple columns
             for (var column = 0; column < size; column++) {
-                var $column = $('<div>').addClass('column empty').attr('data-column', column).attr('data-row', row);
+                var $column = $('<div>').addClass('column empty');
                 $row.append($column);
             }
             $board.append($row);
 
         }
+
+        //when player clicks a slot
         $('.column.empty').on('click', function (event) {
 
+            //check if slot is empty
             if ($(this).hasClass('empty')) {
-                if ($player === 'x') {
-                    $(this).removeClass('empty');
-                    $(this).addClass($player);
-                    $(this).data('player', $player);
-                    var winner = checkWin();
-                    if (!winner) {
-                        $player = 'o';
-                        changePlayer();
-                    }
-                } else if ($player === 'o') {
-                    $(this).removeClass('empty');
-                    $(this).addClass($player);
-                    var winner = checkWin();
-                    if (!winner) {
-                        $player = 'x';
-                        changePlayer();
-                    }
+                $(this).removeClass('empty');
+                $(this).addClass($player);
+                var winner = checkWin();
+                //if no win is achieved trigger next turn
+                if (!winner) {
+                    changePlayer();
                 }
             }
-            // debugger;
+            //if win is achieved display the winner
             if (winner) {
                 console.log("yay");
                 $('.popUp-content>p').text("Congrats player " + $player + "!");
@@ -91,33 +82,18 @@ $(document).ready(function () {
         });
     }
 
-
-
-    // if a slot in the 3x3 grid is clicked give it class x or o depending on the player's turn
-    // also check for wins and change current player to the other player 
-
-    // this is popup window that displayed result
+    // this is a popup window that displays the result
     var popUp = document.getElementById('winPopup');
     var span = document.getElementsByClassName("close")[0];
 
+    //this function checks whether a win is achieved
     function checkWin() {
-        // var doubleSize = selectedSize * 2;
-        var sizeSquared = selectedSize * selectedSize;
-        // var diagonalSize = selectedSize + 1;
-        // var reverseDiagonal = selectedSize - 1;
-        // var bottomLeftCorner = selectedSize * (selectedSize - 1);
-        var arraySize = selectedSize + selectedSize + 2;
-        // debugger;
-
-        //check for wins and display popup when win is achieved
-
-        // checkVertical();
-        // checkDiagonalTopLeft();
-        // checkDiagonalTopRight();
-
 
         var startIndex = 0;
+        //create empty array to store possible winning scenarios
         var arr3 = [];
+
+        //this first loop adds possible horizontal wins to the array
         for (var i = 0; i < selectedSize; i++) {
             var arr2 = [];
             var currentIndex = startIndex;
@@ -129,6 +105,8 @@ $(document).ready(function () {
             startIndex = startIndex + selectedSize;
 
         }
+
+        //this loop adds possible vertical wins to the array
         for (var i = 0; i < selectedSize; i++) {
             var arr2 = [];
             var currentIndex = i;
@@ -139,6 +117,7 @@ $(document).ready(function () {
             arr3.push(arr2);
         }
 
+        //this adds a diagonal top left win
         var arr2 = [];
         var currentIndex = 0;
         for (var j = 0; j < selectedSize; j++) {
@@ -147,6 +126,7 @@ $(document).ready(function () {
         }
         arr3.push(arr2);
 
+        //this adds a diagonal top right win
         var arr4 = [];
         var currentIndex = (selectedSize - 1);
         for (var j = 0; j < selectedSize; j++) {
@@ -155,12 +135,9 @@ $(document).ready(function () {
         }
         arr3.push(arr4);
 
-        // console.log(arr3);
-
-
-        // this will check for a WinningArray win
+        // this will check the array for all possible wins
         function checkWinningArray() {
-
+            var counter = 0;
             for (var i = 0; i < arr3.length; i++) {
 
                 for (var j = 0; j < arr3[i].length; j++) {
@@ -175,104 +152,7 @@ $(document).ready(function () {
                 counter = 0;
             }
 
-            //     var firstIndex = 0
-            //     for (var i = 0; i < selectedSize; i++) {
-            //         var arr = [];
-            //         var classExists = false;
-            //         var currentIndex = firstIndex;
-            //         console.log("currentIndex", currentIndex);
-            //         for (k = 0; k < selectedSize; k++) {
-            //             if ($(".column").eq(currentIndex).hasClass($player)) {
-            //                 arr.push(currentIndex);
-            //                 if (arr.length === (selectedSize - 1)) {
-            //                     return true;
-            //                 }
-            //                 console.log('yes');
-            //             } else {
-            //                 classExists = false;
-            //                 console.log('no');
-            //             }
-            //             currentIndex++;
-            //             // debugger;
-            //             console.log("k", k);
-            //             console.log("The length is " + arr.length);
-
-            //         }
-            //         firstIndex = firstIndex + selectedSize;
-            //         console.log("firstIndex", firstIndex);
-            //         console.log('i', i);
-
-            //         for (var j = 0; j < arr.length; j++) {
-            //             arr.pop();
-            //         }
-            //     }
-            //     return classExists;
-            // }
-
-
         }
-
-        // this will check for a vertical win
-        // function checkVertical() {
-        //     for (var j = 0; j < sizeSquared; j++) {
-        //         var currentRow = '#' + j;
-        //         j += selectedSize;
-        //         var nextRow = '#' + j;
-        //         j += selectedSize;
-        //         var nextNextRow = '#' + j;
-        //         j -= doubleSize;
-        //         if ($(currentRow).hasClass($player) && $(nextRow).hasClass($player) && $(nextNextRow).hasClass($player)) {
-        //             $('.popUp-content>p').text("Congrats player " + $player + "!");
-        //             popUp.style.display = "block";
-
-        //         }
-        //     }
-        // }
-
-
-        // function checkDiagonalTopLeft() {
-        //     for (var j = 0; j < sizeSquared; j++) {
-        //         var currentRow = '#' + j;
-        //         j += diagonalSize;
-        //         var nextRow = '#' + j;
-        //         j += diagonalSize;
-        //         var nextNextRow = '#' + j;
-        //         j += diagonalSize;
-        //         if ($(currentRow).hasClass($player) && $(nextRow).hasClass($player) && $(nextNextRow).hasClass($player)) {
-        //             $('.popUp-content>p').text("Congrats player " + $player + "!");
-        //             popUp.style.display = "block";
-
-        //         }
-        //     }
-
-        // }
-
-        // function checkDiagonalTopRight() {
-        //     for (var j = bottomLeftCorner; j >= 0; j--) {
-        //         var currentRow = '#' + j;
-        //         j -= reverseDiagonal;
-        //         var nextRow = '#' + j;
-        //         j -= reverseDiagonal;
-        //         var nextNextRow = '#' + j;
-
-        //         if ($(currentRow).hasClass($player) && $(nextRow).hasClass($player) && $(nextNextRow).hasClass($player)) {
-        //             $('.popUp-content>p').text("Congrats player " + $player + "!");
-        //             popUp.style.display = "block";
-
-        //         }
-        //     }
-        // }
-
-        // this will check for draw
-        // $('.slot').each(function (index) {
-        //     if ($(this).hasClass('playedO') || $(this).hasClass('playedX')) {
-        //         counter++;
-        //     }
-        //     if (counter === 45) {
-        //         $('.popUp-content>p').text("Aww it's a draw");
-        //         popUp.style.display = "block";
-        //     }
-        // });
         return checkWinningArray();
     }
 
@@ -290,7 +170,7 @@ $(document).ready(function () {
     }
 
     //if replay button is clicked reload page
-    $('.replay').on('click', function () {
+    $('#replay').on('click', function () {
         location.reload();
     });
 

@@ -102,11 +102,11 @@ h2, h2>p {
 
 }
 
-/* the replay button */
-.replay {
+/* the replay + grid button */
+.buttonStyle {
     margin-top: 20px;
     background-color: whitesmoke;
-    width: 65px;
+    /* width: 65px; */
     height: 30px;
     font-family: Arial, Helvetica, sans-serif;
     color: rgb(255, 217, 0);
@@ -119,9 +119,14 @@ h2, h2>p {
     letter-spacing: 1px;
 }
 
-/* the replay button on the popup */
-.popUp-content>.replay {
+/* the button on the popup */
+.popUp-content>.buttonStyle {
     background-color: rgb(255, 217, 0);
     color: whitesmoke;
 
+}
+
+/* the grid button */
+#choiceButton {
+    width: 200;
 }
