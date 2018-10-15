@@ -88,7 +88,7 @@ $(document).ready(function () {
             //if win is achieved display the winner
             if (winner) {
                 console.log("yay");
-                $('.popUp-content>p').text("Congrats player " + $player + "!");
+                $('.popUp_Border>p').text("Congrats player " + $player + "!");
                 popUp.style.display = "block";
             }
 
@@ -176,7 +176,7 @@ $(document).ready(function () {
         }
         if (newCounter === 0) {
             console.log("draw");
-            $('.popUp-content>p').text("Aw it's a draw");
+            $('.popUp_Border>p').text("Aw it's a draw");
             popUp.style.display = "block";
         }
 

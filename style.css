@@ -73,6 +73,7 @@ h2, h2>p {
 
 /* the popup content */
 .popUp-content {
+    border-radius: 20px;
     background-color: #fefefe;
     margin: auto;
     padding: 20px;
@@ -87,12 +88,16 @@ h2, h2>p {
     text-shadow: 1px 1px rgb(255, 183, 0);
 }
 
-.popUp-content>h2 {
-    font-family: 'Sigmar One', cursive;
+.popUp_Border {
+    border: 4px dotted rgb(255, 217, 0);
+    border-radius: 20px;
+    padding: 5px;
 }
 
-.popUp-content>p {
-    font-family: 'Sigmar One', cursive;
+.popUp_Border>p {
+    font-family: 'Amatic SC', cursive;
+    color: black;
+    font-size: 40px;
     letter-spacing: 1px;
 }
 
@@ -134,7 +139,7 @@ h2, h2>p {
 }
 
 /* the button on the popup */
-.popUp-content>.buttonStyle {
+.popUp_Border>.buttonStyle {
     background-color: rgb(255, 217, 0);
     color: whitesmoke;
 
