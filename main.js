@@ -197,7 +197,7 @@ $(document).ready(function () {
     }
 
     //if replay button is clicked reload page
-    $('#replay').on('click', function () {
+    $('.replay').on('click', function () {
         location.reload();
     });
 
