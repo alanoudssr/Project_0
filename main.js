@@ -5,8 +5,11 @@ $(document).ready(function () {
     var span = document.getElementsByClassName("close")[0];
     gridPopUp.style.display = "block";
 
-    //this var determines the current player
-    var $player = 'x';
+    //this contains the player and randomizes the starting player
+    var playerArray = ['x', 'o'];
+    var randomIndex = Math.floor(Math.random() * 2);
+    var $player = playerArray[randomIndex];
+
     //assign the board variable
     var $board = $('#container');
 
@@ -22,9 +25,17 @@ $(document).ready(function () {
 
     // the starting turn of the game is displayed on the page by creating a span and adding text to it
     var $turn = $("<span/>");
-    $turn.text('X');
-    $(".playerTurn").css('color', 'whitesmoke');
-    $turn.css('color', 'black');
+    if ($player === 'o') {
+        $player = 'x';
+        $(".playerTurn").css('color', 'whitesmoke');
+        $turn.css('color', 'black');
+        $turn.text('X');
+    } else if ($player === 'x') {
+        $player = 'o';
+        $(".playerTurn").css('color', 'black');
+        $turn.css('color', 'whitesmoke');
+        $turn.text('O');
+    }
     $(".playerTurn").append($turn);
 
     // this function alternates the text displayed between player x and o
@@ -53,6 +64,7 @@ $(document).ready(function () {
             //within each row create multiple columns
             for (var column = 0; column < size; column++) {
                 var $column = $('<div>').addClass('column empty');
+                $column.css('cursor', 'pointer');
                 $row.append($column);
             }
             $board.append($row);
@@ -65,6 +77,7 @@ $(document).ready(function () {
             //check if slot is empty
             if ($(this).hasClass('empty')) {
                 $(this).removeClass('empty');
+                $(this).css('cursor', 'default');
                 $(this).addClass($player);
                 var winner = checkWin();
                 //if no win is achieved trigger next turn
