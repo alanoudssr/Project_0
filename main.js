@@ -166,6 +166,20 @@ $(document).ready(function () {
             }
 
         }
+
+        //this checks whether a draw is reached
+        var newCounter = 0;
+        for (var i = 0; i < $(".column").length; i++) {
+            if ($(".column").eq(i).hasClass('empty')) {
+                newCounter++;
+            }
+        }
+        if (newCounter === 0) {
+            console.log("draw");
+            $('.popUp-content>p').text("Aw it's a draw");
+            popUp.style.display = "block";
+        }
+
         return checkWinningArray();
     }
 
