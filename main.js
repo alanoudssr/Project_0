@@ -75,7 +75,6 @@ $(document).ready(function() {
         $(this).removeClass("empty");
         $(this).css("cursor", "default");
         $(this).addClass($player);
-        debugger;
         var winner = checkWin();
         //if no win is achieved trigger next turn
         if (!winner) {
