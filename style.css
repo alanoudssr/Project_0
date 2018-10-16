@@ -208,3 +208,10 @@ hr {
   height: 2px;
   border: 0;
 }
+
+#startOne {
+  display: none;
+}
+#startTwo {
+  display: none;
+}
