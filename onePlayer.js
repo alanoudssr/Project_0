@@ -1,4 +1,6 @@
 $(document).ready(function () {
+
+
   //landing popup! Promotes user to choose a grid size
   var gridPopUp = document.getElementById("gridPopup");
   var span = document.getElementsByClassName("close")[0];
@@ -126,24 +128,24 @@ $(document).ready(function () {
           var xCurrentScore;
           var oCurrentScore;
           if ($player === "x") {
-            if (sessionStorage.getItem("xScore") === null) {
-              sessionStorage.setItem("xScore", 1);
-              xCurrentScore = sessionStorage.getItem("xScore");
+            if (sessionStorage.getItem("xAIScore") === null) {
+              sessionStorage.setItem("xAIScore", 1);
+              xCurrentScore = sessionStorage.getItem("xAIScore");
             } else {
-              xCurrentScore = parseInt(sessionStorage.getItem("xScore")) + 1;
-              sessionStorage.setItem("xScore", xCurrentScore);
+              xCurrentScore = parseInt(sessionStorage.getItem("xAIScore")) + 1;
+              sessionStorage.setItem("xAIScore", xCurrentScore);
             }
           } else if ($player === "o") {
-            if (sessionStorage.getItem("oScore") === null) {
-              sessionStorage.setItem("oScore", 1);
-              oCurrentScore = sessionStorage.getItem("oScore");
+            if (sessionStorage.getItem("oAIScore") === null) {
+              sessionStorage.setItem("oAIScore", 1);
+              oCurrentScore = sessionStorage.getItem("oAIScore");
             } else {
-              oCurrentScore = parseInt(sessionStorage.getItem("oScore")) + 1;
-              sessionStorage.setItem("oScore", oCurrentScore);
+              oCurrentScore = parseInt(sessionStorage.getItem("oAIScore")) + 1;
+              sessionStorage.setItem("oAIScore", oCurrentScore);
             }
           }
-          xCurrentScore = sessionStorage.getItem("xScore");
-          oCurrentScore = sessionStorage.getItem("oScore");
+          xCurrentScore = sessionStorage.getItem("xAIScore");
+          oCurrentScore = sessionStorage.getItem("oAIScore");
           scoreXCount.text(xCurrentScore);
           $("#numberOfXWins").append(scoreXCount);
           scoreOCount.text(oCurrentScore);
@@ -303,16 +305,16 @@ $(document).ready(function () {
     var oCurrentScore;
     if (winner) {
 
-      if (sessionStorage.getItem("oScore") === null) {
-        sessionStorage.setItem("oScore", 1);
-        oCurrentScore = sessionStorage.getItem("oScore");
+      if (sessionStorage.getItem("oAIScore") === null) {
+        sessionStorage.setItem("oAIScore", 1);
+        oCurrentScore = sessionStorage.getItem("oAIScore");
       } else {
-        oCurrentScore = parseInt(sessionStorage.getItem("oScore")) + 1;
-        sessionStorage.setItem("oScore", oCurrentScore);
+        oCurrentScore = parseInt(sessionStorage.getItem("oAIScore")) + 1;
+        sessionStorage.setItem("oAIScore", oCurrentScore);
       }
 
-      xCurrentScore = sessionStorage.getItem("xScore");
-      oCurrentScore = sessionStorage.getItem("oScore");
+      xCurrentScore = sessionStorage.getItem("xAIScore");
+      oCurrentScore = sessionStorage.getItem("oAIScore");
       scoreXCount.text(xCurrentScore);
       $("#numberOfXWins").append(scoreXCount);
       scoreOCount.text(oCurrentScore);
@@ -332,9 +334,8 @@ $(document).ready(function () {
         }
       }
       if (newCounter === 0) {
-        console.log("draw");
-        xCurrentScore = sessionStorage.getItem("xScore");
-        oCurrentScore = sessionStorage.getItem("oScore");
+        xCurrentScore = sessionStorage.getItem("xAIScore");
+        oCurrentScore = sessionStorage.getItem("oAIScore");
         scoreXCount.text(xCurrentScore);
         $("#numberOfXWins").append(scoreXCount);
         scoreOCount.text(oCurrentScore);
@@ -382,7 +383,6 @@ $(document).ready(function () {
       }
     }
     if (newCounter === 0) {
-      console.log("draw");
       $(".popUp_Border>p").text("Aw it's a draw");
       popUp.style.display = "block";
     }

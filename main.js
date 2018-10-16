@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
   //landing popup! Promotes user to choose a grid size
   var gridPopUp = document.getElementById("gridPopup");
   var span = document.getElementsByClassName("close")[0];
@@ -203,7 +204,16 @@ $(document).ready(function () {
       }
     }
     if (newCounter === 0) {
-      console.log("draw");
+      var scoreXCount = $("#numberOfXWins");
+      var scoreOCount = $("#numberOfOWins");
+      var xCurrentScore;
+      var oCurrentScore;
+      xCurrentScore = sessionStorage.getItem("xScore");
+      oCurrentScore = sessionStorage.getItem("oScore");
+      scoreXCount.text(xCurrentScore);
+      $("#numberOfXWins").append(scoreXCount);
+      scoreOCount.text(oCurrentScore);
+      $("#numberOfOWins").append(scoreOCount);
       $(".popUp_Border>p").text("Aw it's a draw");
       popUp.style.display = "block";
     }
