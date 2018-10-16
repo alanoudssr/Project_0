@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
   //landing popup! Promotes user to choose a grid size
   var gridPopUp = document.getElementById("gridPopup");
   var span = document.getElementsByClassName("close")[0];
@@ -12,6 +12,8 @@ $(document).ready(function() {
   var noScenario = true;
   function buildArray() {
     var startIndex = 0;
+
+
 
     //this first loop adds possible horizontal wins to the array
     for (var i = 0; i < selectedSize; i++) {
@@ -63,7 +65,7 @@ $(document).ready(function() {
 
   // assign grid size from user
   var selectedSize;
-  $("#choiceButton").click(function() {
+  $("#choiceButton").click(function () {
     selectedSize = $("input[name=gridNum]:checked").val();
     selectedSize = parseInt(selectedSize);
     //close popup and create the grid
@@ -113,7 +115,7 @@ $(document).ready(function() {
     }
 
     //when player clicks a slot
-    $(".column.empty").on("click", function(event) {
+    $(".column.empty").on("click", function (event) {
       if ($player === "x") {
         //check if slot is empty
         if ($(this).hasClass("empty")) {
@@ -174,6 +176,8 @@ $(document).ready(function() {
     //
     //
     console.log(arr3);
+    var ruinPlayer = true;
+
 
     if (moves === NaN || moves === undefined || moves === null) {
       moves = selectedSize;
@@ -202,32 +206,48 @@ $(document).ready(function() {
         }
       }
     } else if (comparingVariable > moves) {
-      loop1: for (var i = 0; i < arr3.length; i++) {
-        loop2: for (var j = 0; j < selectedSize; j++) {
-          if (arr3[i][j] === random) {
-            loop3: for (var k = 0; k < arr3[i].length; k++) {
-              console.log(
-                $(".column")
-                  .eq(arr3[i][k])
-                  .hasClass("empty")
-              );
-              if (
-                $(".column")
-                  .eq(arr3[i][k])
-                  .hasClass("empty")
-              ) {
-                $(".column")
-                  .eq(arr3[i][k])
-                  .removeClass("empty");
 
-                $(".column")
-                  .eq(arr3[i][k])
-                  .addClass("o");
-                random = arr3[i][k];
-                // moves--;
+      loopEvil: for (var i = arr3.length - 1; i >= 0; i--) {
+        var anotherCounter = 0;
+        loopEvil2: for (var j = 0; j < arr3[i].length; j++) {
+          // debugger;
+
+          if ($(".column").eq(arr3[i][j]).hasClass("x")) {
+            anotherCounter++
+          }
+          if (anotherCounter === (selectedSize - 1)) {
+            for (var k = 0; k < arr3[i].length; k++) {
+              if ($(".column").eq(arr3[i][k]).hasClass("empty")) {
+                $(".column").eq(arr3[i][k]).removeClass("empty");
+                $(".column").eq(arr3[i][k]).addClass("o");
                 noScenario = false;
                 var winner = checkWinningArray2();
-                break loop1;
+                ruinPlayer = false;
+                break loopEvil;
+              }
+            }
+          }
+        }
+      }
+      if (ruinPlayer) {
+        // 
+        loop1: for (var i = arr3.length - 1; i >= 0; i--) {
+          loop2: for (var j = 0; j < selectedSize; j++) {
+            // debugger;
+            if (arr3[i][j] === random) {
+              loop3: for (var k = 0; k < arr3[i].length; k++) {
+                for (var w = 0; w < arr3[i].length; w++) {
+                  if ($(".column").eq(arr3[i][w]).hasClass("x")) {
+                    break loop3;
+                  } else if ($(".column").eq(arr3[i][k]).hasClass("empty")) {
+                    $(".column").eq(arr3[i][k]).removeClass("empty");
+                    $(".column").eq(arr3[i][k]).addClass("o");
+                    random = arr3[i][k];
+                    noScenario = false;
+                    var winner = checkWinningArray2();
+                    break loop1;
+                  }
+                }
               }
             }
           }
@@ -247,6 +267,7 @@ $(document).ready(function() {
               .eq(i)
               .removeClass("empty");
             noScenario = false;
+            var winner = checkWinningArray2();
             moves--;
             break;
           }
@@ -275,14 +296,15 @@ $(document).ready(function() {
       }
     }
 
+    var scoreXCount = $("#numberOfXWins");
+    var scoreOCount = $("#numberOfOWins");
+    var xCurrentScore;
+    var oCurrentScore;
     if (winner) {
       //
       //
       //
-      var scoreXCount = $("#numberOfXWins");
-      var scoreOCount = $("#numberOfOWins");
-      var xCurrentScore;
-      var oCurrentScore;
+
 
       if (sessionStorage.getItem("oScore") === null) {
         sessionStorage.setItem("oScore", 1);
@@ -302,6 +324,27 @@ $(document).ready(function() {
       $(".popUp_Border>p").text("Sorry, I win!");
       popUp.style.display = "block";
     } else {
+      var newCounter = 0;
+      for (var i = 0; i < $(".column").length; i++) {
+        if (
+          $(".column")
+            .eq(i)
+            .hasClass("empty")
+        ) {
+          newCounter++;
+        }
+      }
+      if (newCounter === 0) {
+        console.log("draw");
+        xCurrentScore = sessionStorage.getItem("xScore");
+        oCurrentScore = sessionStorage.getItem("oScore");
+        scoreXCount.text(xCurrentScore);
+        $("#numberOfXWins").append(scoreXCount);
+        scoreOCount.text(oCurrentScore);
+        $("#numberOfOWins").append(scoreOCount);
+        $(".popUp_Border>p").text("Aw it's a draw");
+        popUp.style.display = "block";
+      }
       changePlayer();
     }
   }
@@ -353,19 +396,19 @@ $(document).ready(function() {
   //play against AI function
 
   //when popup x button is clicked close the popup
-  span.onclick = function() {
+  span.onclick = function () {
     popUp.style.display = "none";
   };
 
   //when area outside the popup is clicked close the popup
-  window.onclick = function(event) {
+  window.onclick = function (event) {
     if (event.target == popUp) {
       popUp.style.display = "none";
     }
   };
 
   //if replay button is clicked reload page
-  $(".replay").on("click", function() {
+  $(".replay").on("click", function () {
     location.reload();
   });
 });
