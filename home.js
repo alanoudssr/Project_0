@@ -48,10 +48,28 @@ $(document).ready(function () {
   }, 2600);
 
   $("#startOne").on("click", function () {
-    window.location.href = "onePlayer.html";
+    $('#my_audio').get(0).play();
+    goToOnePlayer()
   });
 
   $("#startTwo").on("click", function () {
-    window.location.href = "home.html";
+    $('#my_audio').get(0).play();
+    goToHome();
   });
+
+  function goToHome() {
+    window.setTimeout(() => {
+      window.location.href = "home.html";
+    }, 1000);
+
+  }
+
+  function goToOnePlayer() {
+    window.setTimeout(() => {
+      window.location.href = "onePlayer.html";
+    }, 1000);
+
+
+
+  }
 });
