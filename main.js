@@ -57,7 +57,6 @@ $(document).ready(function() {
     var size = selectedSize;
     $board.empty();
     //loop to create multiple rows
-    var random = 0;
     for (var row = 0; row < size; row++) {
       var $row = $("<div>").addClass("row");
       //within each row create multiple columns
@@ -76,6 +75,7 @@ $(document).ready(function() {
         $(this).removeClass("empty");
         $(this).css("cursor", "default");
         $(this).addClass($player);
+        debugger;
         var winner = checkWin();
         //if no win is achieved trigger next turn
         if (!winner) {
