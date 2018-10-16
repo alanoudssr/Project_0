@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
   //landing popup! Promotes user to choose a grid size
   var gridPopUp = document.getElementById("gridPopup");
   var span = document.getElementsByClassName("close")[0];
@@ -14,7 +14,7 @@ $(document).ready(function() {
 
   // assign grid size from user
   var selectedSize;
-  $("#choiceButton").click(function() {
+  $("#choiceButton").click(function () {
     selectedSize = $("input[name=gridNum]:checked").val();
     selectedSize = parseInt(selectedSize);
     //close popup and create the grid
@@ -27,11 +27,11 @@ $(document).ready(function() {
   if ($player === "o") {
     $player = "x";
     $(".playerTurn").css("color", "whitesmoke");
-    $turn.css("color", "black");
+    $turn.css("color", "rgb(57,148,189)");
     $turn.text("X");
   } else if ($player === "x") {
     $player = "o";
-    $(".playerTurn").css("color", "black");
+    $(".playerTurn").css("color", "rgb(57,148,189)");
     $turn.css("color", "whitesmoke");
     $turn.text("O");
   }
@@ -42,11 +42,11 @@ $(document).ready(function() {
     if ($player === "o") {
       $player = "x";
       $(".playerTurn").css("color", "whitesmoke");
-      $turn.css("color", "black");
+      $turn.css("color", "rgb(57,148,189)");
       $turn.text("X");
     } else if ($player === "x") {
       $player = "o";
-      $(".playerTurn").css("color", "black");
+      $(".playerTurn").css("color", "rgb(57,148,189)");
       $turn.css("color", "whitesmoke");
       $turn.text("O");
     }
@@ -69,7 +69,7 @@ $(document).ready(function() {
     }
 
     //when player clicks a slot
-    $(".column.empty").on("click", function(event) {
+    $(".column.empty").on("click", function (event) {
       //check if slot is empty
       if ($(this).hasClass("empty")) {
         $(this).removeClass("empty");
@@ -212,19 +212,19 @@ $(document).ready(function() {
   }
 
   //when popup x button is clicked close the popup
-  span.onclick = function() {
+  span.onclick = function () {
     popUp.style.display = "none";
   };
 
   //when area outside the popup is clicked close the popup
-  window.onclick = function(event) {
+  window.onclick = function (event) {
     if (event.target == popUp) {
       popUp.style.display = "none";
     }
   };
 
   //if replay button is clicked reload page
-  $(".replay").on("click", function() {
+  $(".replay").on("click", function () {
     location.reload();
   });
 });

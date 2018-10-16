@@ -58,7 +58,9 @@ $(document).ready(function () {
   }
 
   //this declares the player
-  var $player = "x";
+  var playerArray = ["x", "o"];
+  var randomIndex = Math.floor(Math.random() * 2);
+  var $player = playerArray[randomIndex];
 
   //assign the board variable
   var $board = $("#container");
@@ -73,25 +75,13 @@ $(document).ready(function () {
     createGrid();
   });
 
-  // the starting turn of the game is displayed on the page by creating a span and adding text to it
-  var $turn = $("<span/>");
-  $(".playerTurn").css("color", "whitesmoke");
-  $turn.css("color", "black");
-  $turn.text("X");
-  $(".playerTurn").append($turn);
 
   // this function alternates the text displayed between player x and o
   function changePlayer() {
     if ($player === "o") {
       $player = "x";
-      $(".playerTurn").css("color", "whitesmoke");
-      $turn.css("color", "black");
-      $turn.text("X");
     } else if ($player === "x") {
       $player = "o";
-      $(".playerTurn").css("color", "black");
-      $turn.css("color", "whitesmoke");
-      $turn.text("O");
       noScenario = true;
       onePlayer();
     }
@@ -166,6 +156,10 @@ $(document).ready(function () {
         }
       }
     });
+    if ($player === 'o') {
+      onePlayer();
+
+    }
   }
 
   // this is a popup window that displays the result
@@ -173,9 +167,7 @@ $(document).ready(function () {
   var span = document.getElementsByClassName("close")[0];
 
   function onePlayer() {
-    //
-    //
-    console.log(arr3);
+
     var ruinPlayer = true;
 
 
@@ -185,24 +177,33 @@ $(document).ready(function () {
     }
 
     if (moves === comparingVariable) {
-      for (var i = 0; i < $(".column").length; i++) {
-        random = Math.floor(Math.random() * ($(".column").length - 1));
-        if (
-          $(".column")
-            .eq(random)
-            .hasClass("empty")
-        ) {
-          $(".column")
-            .eq(random)
-            .addClass("o");
-          $(".column")
-            .eq(random)
-            .removeClass("empty");
+      if (selectedSize === 3 && $(".column").eq(4).hasClass("empty")) {
+        $(".column").eq(4).addClass("o");
+        $(".column").eq(4).removeClass("empty");
 
-          current = random;
-          noScenario = false;
-          moves--;
-          break;
+        current = random;
+        noScenario = false;
+        moves--;
+      } else {
+        for (var i = 0; i < $(".column").length; i++) {
+          random = Math.floor(Math.random() * ($(".column").length - 1));
+          if (
+            $(".column")
+              .eq(random)
+              .hasClass("empty")
+          ) {
+            $(".column")
+              .eq(random)
+              .addClass("o");
+            $(".column")
+              .eq(random)
+              .removeClass("empty");
+
+            current = random;
+            noScenario = false;
+            moves--;
+            break;
+          }
         }
       }
     } else if (comparingVariable > moves) {
@@ -301,10 +302,6 @@ $(document).ready(function () {
     var xCurrentScore;
     var oCurrentScore;
     if (winner) {
-      //
-      //
-      //
-
 
       if (sessionStorage.getItem("oScore") === null) {
         sessionStorage.setItem("oScore", 1);

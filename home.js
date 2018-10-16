@@ -1,6 +1,45 @@
-$(document).ready(function() {
+$(document).ready(function () {
   // Run code
+  $("#my_audio").on("mousemove", function () {
+    $(this).get(0).play();
+  });
   $("path").css("stroke-dashoffset", "0");
+  $("#startOne").on("mouseenter", function () {
+    $("#startOne>img").attr("src", "images/yellow.gif")
+    stopGif();
+  });
+  function stopGif() {
+    window.setTimeout(() => {
+      $("#startOne>img").attr("src", "images/standing.jpg")
+    }, 1500);
+  }
+  $("#startOne").on("mouseleave", function () {
+    $("#startOne>img").attr("src", "images/done.gif");
+    ignoreStand();
+  });
+  function ignoreStand() {
+    window.setTimeout(() => {
+      $("#startOne>img").attr("src", "images/asleep.jpg")
+    }, 600);
+  }
+  $("#startTwo").on("mouseenter", function () {
+    $("#startTwo>img").attr("src", "images/yellow.gif")
+    stopGifTwo();
+  });
+  function stopGifTwo() {
+    window.setTimeout(() => {
+      $("#startTwo>img").attr("src", "images/standing.jpg")
+    }, 1500);
+  }
+  $("#startTwo").on("mouseleave", function () {
+    $("#startTwo>img").attr("src", "images/done.gif");
+    ignoreStandTwo();
+  });
+  function ignoreStandTwo() {
+    window.setTimeout(() => {
+      $("#startTwo>img").attr("src", "images/asleep.jpg")
+    }, 600);
+  }
   window.setTimeout(() => {
     $("#startOne").css("display", "inline-block");
     $("#startTwo").css("display", "inline-block");
@@ -8,11 +47,11 @@ $(document).ready(function() {
     $("#startTwo").addClass("slideInRight");
   }, 2600);
 
-  $("#startOne").on("click", function() {
+  $("#startOne").on("click", function () {
     window.location.href = "onePlayer.html";
   });
 
-  $("#startTwo").on("click", function() {
+  $("#startTwo").on("click", function () {
     window.location.href = "home.html";
   });
 });
