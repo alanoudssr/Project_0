@@ -5,41 +5,17 @@ $(document).ready(function () {
   });
   $("path").css("stroke-dashoffset", "0");
   $("#startOne").on("mouseenter", function () {
-    $("#startOne>img").attr("src", "images/yellow.gif")
-    stopGif();
+    $("#startOne>img").attr("src", "images/start.gif")
   });
-  function stopGif() {
-    window.setTimeout(() => {
-      $("#startOne>img").attr("src", "images/standing.jpg")
-    }, 1500);
-  }
   $("#startOne").on("mouseleave", function () {
-    $("#startOne>img").attr("src", "images/done.gif");
-    ignoreStand();
+    $("#startOne>img").attr("src", "images/end.gif");
   });
-  function ignoreStand() {
-    window.setTimeout(() => {
-      $("#startOne>img").attr("src", "images/asleep.jpg")
-    }, 600);
-  }
   $("#startTwo").on("mouseenter", function () {
-    $("#startTwo>img").attr("src", "images/yellow.gif")
-    stopGifTwo();
+    $("#startTwo>img").attr("src", "images/start.gif")
   });
-  function stopGifTwo() {
-    window.setTimeout(() => {
-      $("#startTwo>img").attr("src", "images/standing.jpg")
-    }, 1500);
-  }
   $("#startTwo").on("mouseleave", function () {
-    $("#startTwo>img").attr("src", "images/done.gif");
-    ignoreStandTwo();
+    $("#startTwo>img").attr("src", "images/end.gif");
   });
-  function ignoreStandTwo() {
-    window.setTimeout(() => {
-      $("#startTwo>img").attr("src", "images/asleep.jpg")
-    }, 600);
-  }
   window.setTimeout(() => {
     $("#startOne").css("display", "inline-block");
     $("#startTwo").css("display", "inline-block");
