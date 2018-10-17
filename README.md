@@ -1,12 +1,12 @@
-# project_0: Stephen Squawking Presents: Tec Tac Croo
+# Stephen Squawking Presents: Tec Tac Croo
 
 ---
 
 ## Technologies Used:
--JQuery.
-Javascript.
--HTML.
--CSS.
+- JQuery.
+- Javascript.
+- HTML.
+- CSS.
 
 ---
 
