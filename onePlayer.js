@@ -1,5 +1,8 @@
 $(document).ready(function () {
 
+  if (sessionStorage.getItem("playerOne") !== null) {
+    $("#playerOne").val(sessionStorage.getItem("playerOne"));
+  }
 
   //landing popup! Promotes user to choose a grid size
   var gridPopUp = document.getElementById("gridPopup");
@@ -72,6 +75,8 @@ $(document).ready(function () {
   $("#choiceButton").click(function () {
     selectedSize = $("input[name=gridNum]:checked").val();
     selectedSize = parseInt(selectedSize);
+    var $playerOne = $("#playerOne").val();
+    sessionStorage.setItem("playerOne", $playerOne);
     //close popup and create the grid
     gridPopUp.style.display = "none";
     createGrid();
@@ -91,6 +96,9 @@ $(document).ready(function () {
 
   //this function creates the grid automatically (grid size is chosen by the player)
   function createGrid() {
+
+    $('#playerName').text(sessionStorage.getItem("playerOne"));
+
     buildArray();
     var size = selectedSize;
     $board.empty();
@@ -152,10 +160,11 @@ $(document).ready(function () {
           $("#numberOfXWins").append(scoreXCount);
           scoreOCount.text(oCurrentScore);
           $("#numberOfOWins").append(scoreOCount);
+          var playerName = sessionStorage.getItem("playerOne")
 
           // popup winner
 
-          $(".popUp_Border>p").text("Congrats player " + $player + "!");
+          $(".popUp_Border>p").text("Congrats " + playerName + "!");
           popUp.style.display = "block";
         }
       }

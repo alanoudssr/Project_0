@@ -32,7 +32,9 @@
                     <input type="radio" name="gridNum" value="4">hard
                     <input type="radio" name="gridNum" value="5">wild
                 </div>
-                <br /><br />
+                <br />
+                Player 1: <input type="text" id="playerOne" value="player 1"><br>
+                Player 2: <input type="text" id="playerTwo" value="player 2"><br>
                 <input type="button" class="buttonStyle" id="choiceButton" Value="set grid" />
                 <br>
                 <br>
@@ -48,8 +50,8 @@
                 <p></p>
                 <!-- score -->
                 <div id="scoreBlock">
-                    <p class="winning">X's score: <span id="numberOfXWins"></span> </p>
-                    <p class="winning">O's score: <span id="numberOfOWins"></span> </p>
+                    <p class="winning"><span id="xName"></span>'s score: <span id="numberOfXWins"></span> </p>
+                    <p class="winning"><span id="oName"></span>'s score: <span id="numberOfOWins"></span> </p>
                 </div>
                 <button class="buttonStyle replay">replay</button>
             </div>

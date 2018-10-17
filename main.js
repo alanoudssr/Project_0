@@ -1,5 +1,10 @@
 $(document).ready(function () {
+  var turnOne = true;
 
+  if (sessionStorage.getItem("playerOne") !== null) {
+    $("#playerOne").val(sessionStorage.getItem("playerOne"));
+    $("#playerTwo").val(sessionStorage.getItem("playerTwo"));
+  }
   //landing popup! Promotes user to choose a grid size
   var gridPopUp = document.getElementById("gridPopup");
   var span = document.getElementsByClassName("close")[0];
@@ -18,43 +23,55 @@ $(document).ready(function () {
   $("#choiceButton").click(function () {
     selectedSize = $("input[name=gridNum]:checked").val();
     selectedSize = parseInt(selectedSize);
+    var $playerOne = $("#playerOne").val();
+    var $playerTwo = $("#playerTwo").val();
+    sessionStorage.setItem("playerOne", $playerOne);
+    sessionStorage.setItem("playerTwo", $playerTwo);
     //close popup and create the grid
     gridPopUp.style.display = "none";
     createGrid();
   });
 
-  // the starting turn of the game is displayed on the page by creating a span and adding text to it
-  var $turn = $("<span/>");
-  if ($player === "o") {
-    $player = "x";
-    $(".playerTurn").css("color", "whitesmoke");
-    $turn.css("color", "rgb(57,148,189)");
-    $turn.text("X");
-  } else if ($player === "x") {
-    $player = "o";
-    $(".playerTurn").css("color", "rgb(57,148,189)");
-    $turn.css("color", "whitesmoke");
-    $turn.text("O");
-  }
-  $(".playerTurn").append($turn);
 
-  // this function alternates the text displayed between player x and o
-  function changePlayer() {
-    if ($player === "o") {
-      $player = "x";
-      $(".playerTurn").css("color", "whitesmoke");
-      $turn.css("color", "rgb(57,148,189)");
-      $turn.text("X");
-    } else if ($player === "x") {
-      $player = "o";
-      $(".playerTurn").css("color", "rgb(57,148,189)");
-      $turn.css("color", "whitesmoke");
-      $turn.text("O");
-    }
-  }
+
+
 
   //this function creates the grid automatically (grid size is chosen by the player)
   function createGrid() {
+
+    // the starting turn of the game is displayed on the page by creating a span and adding text to it
+    var $turn = $("<span/>");
+    if (turnOne) {
+      turnOne = false;
+      if ($player === "o") {
+        $player = "x";
+        $(".playerTurn").css("color", "whitesmoke");
+        $turn.css("color", "rgb(57,148,189)");
+        $turn.text(sessionStorage.getItem("playerOne"));
+      } else if ($player === "x") {
+        $player = "o";
+        $(".playerTurn").css("color", "rgb(57,148,189)");
+        $turn.css("color", "whitesmoke");
+        $turn.text(sessionStorage.getItem("playerTwo"));
+      }
+    }
+    $(".playerTurn").append($turn);
+
+    // this function alternates the text displayed between player x and o
+    function changePlayer() {
+      if ($player === "o") {
+        $player = "x";
+        $(".playerTurn").css("color", "whitesmoke");
+        $turn.css("color", "rgb(57,148,189)");
+        $turn.text(sessionStorage.getItem("playerOne"));
+      } else if ($player === "x") {
+        $player = "o";
+        $(".playerTurn").css("color", "rgb(57,148,189)");
+        $turn.css("color", "whitesmoke");
+        $turn.text(sessionStorage.getItem("playerTwo"));
+      }
+    }
+
     var size = selectedSize;
     $board.empty();
     //loop to create multiple rows
@@ -110,13 +127,23 @@ $(document).ready(function () {
         }
         xCurrentScore = sessionStorage.getItem("xScore");
         oCurrentScore = sessionStorage.getItem("oScore");
-        scoreXCount.text(xCurrentScore);
-        $("#numberOfXWins").append(scoreXCount);
-        scoreOCount.text(oCurrentScore);
-        $("#numberOfOWins").append(scoreOCount);
+        $("#numberOfXWins").text(xCurrentScore).css("color", "rgb(57,148,189)");
+        $("#numberOfOWins").text(oCurrentScore).css("color", "rgb(57,148,189)");
+        var xName = sessionStorage.getItem("playerOne");
+        var oName = sessionStorage.getItem("playerTwo");
+        $("#xName").text(xName);
+        $("#oName").text(oName);
 
         // popup winner
-        $(".popUp_Border>p").text("Congrats player " + $player + "!");
+        if ($player == "x") {
+          console.log("i am", $player);
+          var first = sessionStorage.getItem("playerOne");
+          $(".popUp_Border>p").text("Congrats " + first + "!");
+        } else {
+          console.log("i am", $player);
+          var second = sessionStorage.getItem("playerTwo");
+          $(".popUp_Border>p").text("Congrats " + second + "!");
+        }
         popUp.style.display = "block";
       }
     });
@@ -206,16 +233,14 @@ $(document).ready(function () {
       }
     }
     if (newCounter === 0) {
-      var scoreXCount = $("#numberOfXWins");
-      var scoreOCount = $("#numberOfOWins");
-      var xCurrentScore;
-      var oCurrentScore;
-      xCurrentScore = sessionStorage.getItem("xScore");
-      oCurrentScore = sessionStorage.getItem("oScore");
-      scoreXCount.text(xCurrentScore);
-      $("#numberOfXWins").append(scoreXCount);
-      scoreOCount.text(oCurrentScore);
-      $("#numberOfOWins").append(scoreOCount);
+      var xCurrentScore = sessionStorage.getItem("xScore");
+      var oCurrentScore = sessionStorage.getItem("oScore");
+      $("#numberOfXWins").text(xCurrentScore).css("color", "rgb(57,148,189)");
+      $("#numberOfOWins").text(oCurrentScore).css("color", "rgb(57,148,189)");
+      var xName = sessionStorage.getItem("playerOne");
+      var oName = sessionStorage.getItem("playerTwo");
+      $("#xName").text(xName);
+      $("#oName").text(oName);
       $(".popUp_Border>p").text("Aw it's a draw");
       popUp.style.display = "block";
     }
