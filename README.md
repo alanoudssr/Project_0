@@ -1,12 +1,16 @@
-#project_0: Stephen Squawking Presents: Tec Tac Croo
+# project_0: Stephen Squawking Presents: Tec Tac Croo
 
-##Technologies Used:
+---
+
+## Technologies Used:
 -JQuery.
 Javascript.
 -HTML.
 -CSS.
 
-##Thought process:
+---
+
+## Thought process:
 1. Started off with an HTML file to hold off the entire game.
 2. Started working on the JS and Jquery creating grid functions.
 3. Moved towards the winning function
@@ -15,17 +19,23 @@ Javascript.
 6. Creating a landing page.
 7. Styling and animation
 
-##Link:
+---
+
+## Link:
 [Stephen Squawking Presents: Tec Tac Croo](https://alanoudssr.github.io/project_0/)
 
-##What's Next:
+---
+
+## What's Next:
 - Online multiplayer.
 - Adding customizable game tokens.
 
-##Credits:
-[Google Fonts] (https://fonts.google.com)
-[JQquery] (https://github.com/jquery/jquery)
-[Animate CC] (https://daneden.github.io/animate.css/)
-[Peacock illustration] (https://alboardman.tumblr.com/post/125439936401/peacock)
+---
+
+## Credits:
+- [Google Fonts](https://fonts.google.com)
+- [JQquery](https://github.com/jquery/jquery)
+- [Animate CC](https://daneden.github.io/animate.css/)
+- [Peacock illustration](https://alboardman.tumblr.com/post/125439936401/peacock)
 
 
