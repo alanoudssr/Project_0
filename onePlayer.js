@@ -215,6 +215,30 @@ $(document).ready(function () {
         }
       }
     } else if (comparingVariable > moves) {
+      loopWinner: for (var i = arr3.length - 1; i >= 0; i--) {
+        var anotherCounter = 0;
+        loopWinner2: for (var j = 0; j < arr3[i].length; j++) {
+          // debugger;
+
+          if ($(".column").eq(arr3[i][j]).hasClass("o")) {
+            anotherCounter++
+          }
+          if (anotherCounter === (selectedSize - 1)) {
+            for (var k = 0; k < arr3[i].length; k++) {
+              if ($(".column").eq(arr3[i][k]).hasClass("empty")) {
+                $(".column").eq(arr3[i][k]).removeClass("empty");
+                $(".column").eq(arr3[i][k]).addClass("o");
+                $(".column").eq(arr3[i][k]).css("border", "none");
+                $(".column").eq(arr3[i][k]).css("background-color", "rgb(57, 148, 189)");
+                noScenario = false;
+                var winner = checkWinningArray2();
+                ruinPlayer = false;
+                break loopWinner;
+              }
+            }
+          }
+        }
+      }
 
       loopEvil: for (var i = arr3.length - 1; i >= 0; i--) {
         var anotherCounter = 0;
@@ -240,6 +264,8 @@ $(document).ready(function () {
           }
         }
       }
+      // 
+
       if (ruinPlayer) {
         // 
         loop1: for (var i = arr3.length - 1; i >= 0; i--) {
@@ -333,8 +359,6 @@ $(document).ready(function () {
       $("#numberOfOWins").append(scoreOCount);
 
       $(".popUp_Border>p").text("Hahaha, I win!");
-      $('#my_audio').get(0).play();
-      stopAudio();
       popUp.style.display = "block";
     } else {
       var newCounter = 0;
@@ -423,7 +447,5 @@ $(document).ready(function () {
     location.reload();
   });
 
-  function stopAudio() {
-    $('#my_audio').get(0).pause();
-  }
+
 });

@@ -1,20 +1,24 @@
 $(document).ready(function () {
-  // Run code
-  $("#my_audio").on("mousemove", function () {
-    $(this).get(0).play();
-  });
+
   $("path").css("stroke-dashoffset", "0");
-  $("#startOne").on("mouseenter", function () {
-    $("#startOne>img").attr("src", "images/start.gif")
+
+  $(".homeButtonStyle").on("mouseenter", function () {
+    // if ($(this).is("#startOne")) {
+    if (this.id === "startOne") {
+      $("#startOne>img").attr("src", "images/start.gif")
+    } else {
+      $("#startTwo>img").attr("src", "images/startcopy.gif")
+
+    }
   });
-  $("#startOne").on("mouseleave", function () {
-    $("#startOne>img").attr("src", "images/end.gif");
-  });
-  $("#startTwo").on("mouseenter", function () {
-    $("#startTwo>img").attr("src", "images/start.gif")
-  });
-  $("#startTwo").on("mouseleave", function () {
-    $("#startTwo>img").attr("src", "images/end.gif");
+
+  $(".homeButtonStyle").on("mouseleave", function () {
+    // if ($(this).is("#startOne")) {
+    if (this.id === "startOne") {
+      $("#startOne>img").attr("src", "images/end.gif");
+    } else {
+      $("#startTwo>img").attr("src", "images/endcopy.gif");
+    }
   });
   window.setTimeout(() => {
     $("#startOne").css("display", "inline-block");
