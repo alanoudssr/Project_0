@@ -113,6 +113,8 @@ $(document).ready(function () {
         if ($(this).hasClass("empty")) {
           $(this).removeClass("empty");
           $(this).css("cursor", "default");
+          $(this).css("border", "none");
+          $(this).css("background-color", "rgb(57, 148, 189)");
           $(this).addClass($player);
           var winner = checkWin();
           //if no win is achieved trigger next turn
@@ -181,6 +183,8 @@ $(document).ready(function () {
     if (moves === comparingVariable) {
       if (selectedSize === 3 && $(".column").eq(4).hasClass("empty")) {
         $(".column").eq(4).addClass("o");
+        $(".column").eq(4).css("border", "none");
+        $(".column").eq(4).css("background-color", "rgb(57, 148, 189)");
         $(".column").eq(4).removeClass("empty");
 
         current = random;
@@ -197,6 +201,8 @@ $(document).ready(function () {
             $(".column")
               .eq(random)
               .addClass("o");
+            $(".column").eq(random).css("border", "none");
+            $(".column").eq(random).css("background-color", "rgb(57, 148, 189)");
             $(".column")
               .eq(random)
               .removeClass("empty");
@@ -223,6 +229,8 @@ $(document).ready(function () {
               if ($(".column").eq(arr3[i][k]).hasClass("empty")) {
                 $(".column").eq(arr3[i][k]).removeClass("empty");
                 $(".column").eq(arr3[i][k]).addClass("o");
+                $(".column").eq(arr3[i][k]).css("border", "none");
+                $(".column").eq(arr3[i][k]).css("background-color", "rgb(57, 148, 189)");
                 noScenario = false;
                 var winner = checkWinningArray2();
                 ruinPlayer = false;
@@ -245,6 +253,8 @@ $(document).ready(function () {
                   } else if ($(".column").eq(arr3[i][k]).hasClass("empty")) {
                     $(".column").eq(arr3[i][k]).removeClass("empty");
                     $(".column").eq(arr3[i][k]).addClass("o");
+                    $(".column").eq(arr3[i][k]).css("border", "none");
+                    $(".column").eq(arr3[i][k]).css("background-color", "rgb(57, 148, 189)");
                     random = arr3[i][k];
                     noScenario = false;
                     var winner = checkWinningArray2();
@@ -266,6 +276,8 @@ $(document).ready(function () {
             $(".column")
               .eq(i)
               .addClass("o");
+            $(".column").eq(i).css("border", "none");
+            $(".column").eq(i).css("background-color", "rgb(57, 148, 189)");
             $(".column")
               .eq(i)
               .removeClass("empty");
@@ -320,7 +332,9 @@ $(document).ready(function () {
       scoreOCount.text(oCurrentScore);
       $("#numberOfOWins").append(scoreOCount);
 
-      $(".popUp_Border>p").text("Sorry, I win!");
+      $(".popUp_Border>p").text("Hahaha, I win!");
+      $('#my_audio').get(0).play();
+      stopAudio();
       popUp.style.display = "block";
     } else {
       var newCounter = 0;
@@ -408,4 +422,8 @@ $(document).ready(function () {
   $(".replay").on("click", function () {
     location.reload();
   });
+
+  function stopAudio() {
+    $('#my_audio').get(0).pause();
+  }
 });

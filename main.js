@@ -75,6 +75,8 @@ $(document).ready(function () {
       if ($(this).hasClass("empty")) {
         $(this).removeClass("empty");
         $(this).css("cursor", "default");
+        $(this).css("border", "none");
+        $(this).css("background-color", "rgb(57, 148, 189)");
         $(this).addClass($player);
         var winner = checkWin();
         //if no win is achieved trigger next turn
