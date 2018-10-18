@@ -9,16 +9,15 @@ $(document).ready(function () {
   var span = document.getElementsByClassName("close")[0];
   gridPopUp.style.display = "block";
 
-  //
+  //variables needed
   var arr3 = [];
   var moves;
-  var comparingVariable;
   var random = 0;
   var noScenario = true;
+
+  //this function builds the array of winning scenarios
   function buildArray() {
     var startIndex = 0;
-
-
 
     //this first loop adds possible horizontal wins to the array
     for (var i = 0; i < selectedSize; i++) {
@@ -62,7 +61,7 @@ $(document).ready(function () {
     arr3.push(arr4);
   }
 
-  //this declares the player
+  //this declares the starting player
   var playerArray = ["x", "o"];
   var randomIndex = Math.floor(Math.random() * 2);
   var $player = playerArray[randomIndex];
@@ -70,20 +69,21 @@ $(document).ready(function () {
   //assign the board variable
   var $board = $("#container");
 
-  // assign grid size from user
+  // get grid size and user name 
   var selectedSize;
   $("#choiceButton").click(function () {
     selectedSize = $("input[name=gridNum]:checked").val();
     selectedSize = parseInt(selectedSize);
     var $playerOne = $("#playerOne").val();
     sessionStorage.setItem("playerOne", $playerOne);
+
     //close popup and create the grid
     gridPopUp.style.display = "none";
     createGrid();
   });
 
 
-  // this function alternates the text displayed between player x and o
+  // this function alternates between player x and o
   function changePlayer() {
     if ($player === "o") {
       $player = "x";
@@ -100,13 +100,14 @@ $(document).ready(function () {
     $('#playerName').text(sessionStorage.getItem("playerOne"));
 
     buildArray();
-    var size = selectedSize;
+
+    // var size = selectedSize;
     $board.empty();
     //loop to create multiple rows
-    for (var row = 0; row < size; row++) {
+    for (var row = 0; row < selectedSize; row++) {
       var $row = $("<div>").addClass("row");
       //within each row create multiple columns
-      for (var column = 0; column < size; column++) {
+      for (var column = 0; column < selectedSize; column++) {
         var $column = $("<div>").addClass("column empty");
         $column.css("cursor", "pointer");
         $row.append($column);
@@ -186,35 +187,28 @@ $(document).ready(function () {
 
     if (moves === NaN || moves === undefined || moves === null) {
       moves = selectedSize;
-      comparingVariable = selectedSize;
     }
 
-    if (moves === comparingVariable) {
+    if (moves === selectedSize) {
       if (selectedSize === 3 && $(".column").eq(4).hasClass("empty")) {
         $(".column").eq(4).addClass("o");
         $(".column").eq(4).css("border", "none");
         $(".column").eq(4).css("background-color", "rgb(57, 148, 189)");
         $(".column").eq(4).removeClass("empty");
 
-        current = random;
+        current = 4;
         noScenario = false;
         moves--;
       } else {
         for (var i = 0; i < $(".column").length; i++) {
           random = Math.floor(Math.random() * ($(".column").length - 1));
           if (
-            $(".column")
-              .eq(random)
-              .hasClass("empty")
+            $(".column").eq(random).hasClass("empty")
           ) {
-            $(".column")
-              .eq(random)
-              .addClass("o");
+            $(".column").eq(random).addClass("o");
             $(".column").eq(random).css("border", "none");
             $(".column").eq(random).css("background-color", "rgb(57, 148, 189)");
-            $(".column")
-              .eq(random)
-              .removeClass("empty");
+            $(".column").eq(random).removeClass("empty");
 
             current = random;
             noScenario = false;
@@ -223,11 +217,10 @@ $(document).ready(function () {
           }
         }
       }
-    } else if (comparingVariable > moves) {
+    } else if (selectedSize > moves) {
       loopWinner: for (var i = arr3.length - 1; i >= 0; i--) {
         var anotherCounter = 0;
         loopWinner2: for (var j = 0; j < arr3[i].length; j++) {
-          // debugger;
 
           if ($(".column").eq(arr3[i][j]).hasClass("o")) {
             anotherCounter++
@@ -404,9 +397,7 @@ $(document).ready(function () {
         for (var j = 0; j < arr3[i].length; j++) {
           var index = arr3[i][j];
           if (
-            $(".column")
-              .eq(index)
-              .hasClass("x")
+            $(".column").eq(index).hasClass("x")
           ) {
             counter++;
           }
@@ -422,9 +413,7 @@ $(document).ready(function () {
     var newCounter = 0;
     for (var i = 0; i < $(".column").length; i++) {
       if (
-        $(".column")
-          .eq(i)
-          .hasClass("empty")
+        $(".column").eq(i).hasClass("empty")
       ) {
         newCounter++;
       }
