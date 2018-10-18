@@ -33,9 +33,9 @@
 ---
 
 ## Credits:
-- @ga-wolf
-- @trevorpreston
-- @mfalthaw
+- Jack Jeffress [@ga-wolf](https://github.com/ga-wolf)
+- Trevor Preston [@trevorpreston](https://github.com/trevorpreston)
+- Moath Althawad [@mfalthaw](https://github.com/mfalthaw/)
 - [Google Fonts](https://fonts.google.com)
 - [JQquery](https://github.com/jquery/jquery)
 - [Animate CC](https://daneden.github.io/animate.css/)
