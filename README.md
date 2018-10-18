@@ -33,6 +33,9 @@
 ---
 
 ## Credits:
+- @ga-wolf
+- @trevorpreston
+- @mfalthaw
 - [Google Fonts](https://fonts.google.com)
 - [JQquery](https://github.com/jquery/jquery)
 - [Animate CC](https://daneden.github.io/animate.css/)

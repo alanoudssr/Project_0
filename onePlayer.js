@@ -97,11 +97,12 @@ $(document).ready(function () {
   //this function creates the grid automatically (grid size is chosen by the player)
   function createGrid() {
 
+    // display name on game start
     $('#playerName').text(sessionStorage.getItem("playerOne"));
 
     buildArray();
 
-    // var size = selectedSize;
+    // empty out the board before creating a new one
     $board.empty();
     //loop to create multiple rows
     for (var row = 0; row < selectedSize; row++) {
@@ -386,7 +387,6 @@ $(document).ready(function () {
       changePlayer();
     }
   }
-  //create empty array to store possible winning scenarios
 
   //this function checks whether a win is achieved
   function checkWin() {
@@ -425,8 +425,6 @@ $(document).ready(function () {
 
     return checkWinningArray();
   }
-
-  //play against AI function
 
   //when popup x button is clicked close the popup
   span.onclick = function () {
