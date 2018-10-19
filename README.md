@@ -141,7 +141,7 @@ for (var j = 0; j < selectedSize*selectedSize; j+= selectedSize) {
 ```
 There are two types of diagonal wins: top left corner, and right left corner 
 
-#### First top right corner:
+#### 1. Top right corner:
 This is what a diagonal top right corner winning scenario would  look like in a 3x3 grid:
 [2, 4, 6]
 
@@ -184,7 +184,7 @@ Arr3 = [ [0,1,2] , [3,4,5] , [6,7,8] , [0,3,6] , [1,4,7] , [2,5,8] , [2,4,6] ]
   } 
   ```
 
-#### Second top left corner:
+#### 2. Top left corner:
 This is what a diagonal top left corner winning scenario would look like in a 3x3 grid:
 [0, 4, 8]
 
