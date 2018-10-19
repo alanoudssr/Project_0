@@ -245,11 +245,10 @@ hr {
   text-transform: uppercase;
 }
 
-.playerTurn{
-
+.blue{
    color: rgb(57,148,189);
 }
 
-#playerStarting {
+.white {
    color: whitesmoke;
 }
