@@ -6,8 +6,9 @@ $(document).ready(function () {
   // check if the player had previously written their name before --> Improving UX
   if (sessionStorage.getItem("playerOne") !== null) {
     $("#playerOne").val(sessionStorage.getItem("playerOne"));
-    if (!sessionStorage.getItem("playerTwo") === "undefined") {
-      $("#playerTwo").val(sessionStorage.getItem("playerTwo"));
+    $("#playerTwo").val(sessionStorage.getItem("playerTwo"));
+    if (sessionStorage.getItem("playerTwo") === "undefined") {
+      $("#playerTwo").val("player 2");
     }
   }
 
@@ -34,7 +35,7 @@ $(document).ready(function () {
     var oCurrentScore = parseInt(sessionStorage.getItem("oScore"));
   }
 
-  //initiate landing popup! Shows up on load
+  //initiate landing popup! Shows up on load and promotes user to choose a grid size and user name
   var gridPopUp = document.getElementById("gridPopup");
   var span = document.getElementsByClassName("close")[0];
   gridPopUp.style.display = "block";
@@ -75,10 +76,8 @@ $(document).ready(function () {
     //this loop adds possible vertical wins to the array
     for (var i = 0; i < selectedSize; i++) {
       var arr2 = [];
-      var currentIndex = i;
-      for (var j = 0; j < selectedSize; j++) {
-        arr2.push(currentIndex);
-        currentIndex += selectedSize;
+      for (var j = i; j < selectedSize * selectedSize; j += selectedSize) {
+        arr2.push(j);
       }
       arr3.push(arr2);
     }
@@ -100,9 +99,10 @@ $(document).ready(function () {
       currentIndex += selectedSize - 1;
     }
     arr3.push(arr4);
+    console.log(arr3);
   }
 
-  //landing popup promotes user to choose a grid size and user name 
+  //landing popup button --> on click set grid size and user name 
   var selectedSize;
   $("#choiceButton").click(function () {
     selectedSize = parseInt($("input[name=gridNum]:checked").val());
@@ -178,11 +178,9 @@ $(document).ready(function () {
           addToken($(this));
         }
       }
-      if ($player === 'o') {
-        if (!isAI) {
-          if ($(this).hasClass('empty')) {
-            addToken($(this));
-          }
+      if ($player === 'o' && !isAI) {
+        if ($(this).hasClass('empty')) {
+          addToken($(this));
         }
       }
     });

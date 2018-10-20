@@ -125,7 +125,7 @@ Arr3 = [ [0,1,2] , [3,4,5] , [6,7,8] , [0,3,6] , [1,4,7] , [2,5,8] ]
 ```
 for (var i = 0; i < selectedSize; i++) {
       var arr2 = [];
-for (var j = 0; j < selectedSize*selectedSize; j+= selectedSize) {
+for (var j = i; j < selectedSize*selectedSize; j+= selectedSize) {
         arr2.push(j);
       }
       arr3.push(arr2);
