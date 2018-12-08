@@ -258,7 +258,7 @@ A good way to avoid this is to shuffle this array every time the game is played.
 ---
 
 ## Link:
-[Stephen Squawking Presents: Tec Tac Croo](https://alanoudssr.github.io/project_0/)
+[Stephen Squawking Presents: Tec Tac Croo](https://alanoudssr.github.io/project_0-tic-tac-toe/)
 
 ---
 
